@@ -1,8 +1,9 @@
-resolver: lts-14.27
+resolver:
+  url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/21/10.yaml
 
 extra-deps:
-  - universum-1.6.1
-  - o-clock-1.1.0
+  - universum-1.8.2
+  - o-clock-1.3.0
 
 nix:
   packages: [git, openssh, gmp, binutils]

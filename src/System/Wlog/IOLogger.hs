@@ -51,11 +51,11 @@ module System.Wlog.IOLogger
        , retrieveLogContent
        ) where
 
-import Universum
+import Universum hiding (view, (^.), (%~), (.~))
 
 import Control.Concurrent.MVar (modifyMVar, modifyMVar_, withMVar)
 import Data.Maybe (fromJust)
-import Lens.Micro.Platform (makeLenses)
+import Lens.Micro.Platform (makeLenses, view, (^.), (%~), (.~))
 import System.FilePath ((</>))
 import System.IO.Unsafe (unsafePerformIO)
 

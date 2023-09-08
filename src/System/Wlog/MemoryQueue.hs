@@ -15,10 +15,10 @@ module System.Wlog.MemoryQueue
        , mqLimit
        ) where
 
-import Universum
+import Universum hiding (view)
 
 import Data.Sequence (ViewR (..), viewr, (<|))
-import Lens.Micro.Platform (makeLenses)
+import Lens.Micro.Platform (makeLenses, view)
 
 import qualified Data.Text as T
 

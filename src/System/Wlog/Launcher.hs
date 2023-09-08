@@ -124,7 +124,7 @@ parseLoggerConfig loggerConfigPath =
 -- | Applies given builder to parsed logger config and initializes logging.
 buildAndSetupYamlLogging :: MonadIO m => LoggerConfig -> FilePath -> m ()
 buildAndSetupYamlLogging configBuilder loggerConfigPath = do
-    cfg@LoggerConfig{..} <- parseLoggerConfig loggerConfigPath
+    cfg@LoggerConfig{} <- parseLoggerConfig loggerConfigPath
     let builtConfig       = cfg <> configBuilder
     setupLogging Nothing builtConfig
 

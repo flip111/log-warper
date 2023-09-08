@@ -5,6 +5,7 @@
 {-# LANGUAGE OverloadedLists       #-}
 {-# LANGUAGE Rank2Types            #-}
 {-# LANGUAGE TypeFamilies          #-}
+{-# LANGUAGE TypeOperators         #-}
 
 -- | Type class that add ability to log messages.
 -- Supports pure and IO logging.

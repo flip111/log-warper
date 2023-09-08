@@ -107,10 +107,10 @@ rotationFileHandler
     -> FilePath
     -> Severities
     -> m RollerHandler
-rotationFileHandler rp@RotationParameters{..} _ _
+rotationFileHandler rp@RotationParameters{} _ _
     | not $ isValidRotation rp = liftIO $ throwM $ InvalidRotation $
       "Rotation parameters must be positive: "+||rp||+""
-rotationFileHandler rp@RotationParameters{..} handlerPath rhSeverities = liftIO $ do
+rotationFileHandler rp@RotationParameters{} handlerPath rhSeverities = liftIO $ do
     GenericHandler{..} <- fileHandler handlerPath rhSeverities
     rhFileHandle       <- newMVar privData
     let rhWriteAction   = rollerWriting rp handlerPath writeFunc rhFileHandle

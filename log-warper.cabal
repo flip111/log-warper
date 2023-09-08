@@ -1,3 +1,4 @@
+cabal-version:       3.8
 name:                log-warper
 version:             1.9.0
 synopsis:            Flexible, configurable, monadic and pretty logging
@@ -16,10 +17,7 @@ extra-source-files:  CHANGES.md
                    , examples/PureLogging.lhs
 stability:           experimental
 build-type:          Simple
-cabal-version:       >=2.0
 description:         This package implements nice and featureful wrapper around hslogger library.
-tested-with:         GHC == 8.0.2
-                   , GHC == 8.2.2
 
 library
   exposed-modules:     System.Wlog
@@ -45,29 +43,29 @@ library
   other-modules:       System.Wlog.Color
                        System.Wlog.MemoryQueue
 
-  build-depends:       base                 >= 4.9 && < 5
-                     , aeson                ^>= 1.4
-                     , ansi-terminal        >= 0.7 && < 1.0
-                     , containers           ^>= 0.6
-                     , deepseq              ^>= 1.4
-                     , directory            ^>= 1.3
-                     , filepath             ^>= 1.4.1
-                     , fmt                  ^>= 0.6
-                     , lifted-async         >= 0.9 && < 0.11
-                     , microlens-platform   >= 0.3.9 && < 0.5
-                     , monad-control        ^>= 1.0.1.0
-                     , monad-loops          ^>= 0.4.3
-                     , mmorph               ^>= 1.1
-                     , mtl                  ^>= 2.2.1
-                     , o-clock              ^>= 1.1
-                     , text                 ^>= 1.2.2.0
-                     , time                 >= 1.8 && < 2.0
-                     , transformers         ^>= 0.5.2
-                     , transformers-base    ^>= 0.4.4
-                     , universum            ^>= 1.6.0
-                     , unordered-containers >= 0.2.7.1
-                     , vector               ^>= 0.12
-                     , yaml                 ^>= 0.11
+  build-depends:       base
+                     , aeson
+                     , ansi-terminal
+                     , containers
+                     , deepseq
+                     , directory
+                     , filepath
+                     , fmt
+                     , lifted-async
+                     , microlens-platform
+                     , monad-control
+                     , monad-loops
+                     , mmorph
+                     , mtl
+                     , o-clock
+                     , text
+                     , time
+                     , transformers
+                     , transformers-base
+                     , universum
+                     , unordered-containers
+                     , vector
+                     , yaml
 
   if !os(windows)
     build-depends:     unix
@@ -89,12 +87,12 @@ executable play-log
   main-is:             Playground.hs
 
   build-depends:       log-warper
-                     , universum  >= 1.0.2
-                     , microlens  >= 0.4
-                     , monad-control ^>= 1.0.1.0
-                     , yaml       >= 0.8.20
+                     , universum
+                     , microlens
+                     , monad-control
+                     , yaml
   if impl(ghc >= 8.2.2)
-     build-depends:   o-clock ^>= 1.1
+     build-depends:   o-clock
 
   hs-source-dirs:      examples
   default-language:    Haskell2010
@@ -114,10 +112,10 @@ executable how-to
 
   build-tool-depends:  markdown-unlit:markdown-unlit
 
-  build-depends:       base           >= 4.9 && < 5
+  build-depends:       base
                      , log-warper
-                     , markdown-unlit >= 0.4
-                     , text           >= 1.2.2.1
+                     , markdown-unlit
+                     , text
 
   hs-source-dirs:      examples
   default-language:    Haskell2010
@@ -129,11 +127,11 @@ executable pure-how-to
   main-is:             PureLogging.lhs
 
   build-tool-depends:  markdown-unlit:markdown-unlit
-  build-depends:       base           >= 4.7 && < 5
+  build-depends:       base
                      , log-warper
-                     , markdown-unlit >= 0.4
+                     , markdown-unlit
                      , mtl
-                     , text           >= 1.2.2.1
+                     , text
 
   hs-source-dirs:      examples
   default-language:    Haskell2010

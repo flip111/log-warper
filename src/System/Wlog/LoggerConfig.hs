@@ -58,14 +58,14 @@ module System.Wlog.LoggerConfig
        , termSeveritiesErrB
        ) where
 
-import Universum
+import Universum hiding (Traversal')
 
 import Data.Aeson (withObject)
 import Data.Traversable (for)
 import Data.Yaml (FromJSON (..), Object, Parser, ToJSON (..), Value (..), object, (.!=), (.:),
                   (.:?), (.=))
 import Fmt (Buildable (..), (||+))
-import Lens.Micro.Platform (at, makeLenses, zoom, _Just)
+import Lens.Micro.Platform (at, makeLenses, zoom, _Just, Traversal')
 import System.FilePath (normalise)
 
 import System.Wlog.LoggerName (LoggerName (..))
@@ -73,6 +73,9 @@ import System.Wlog.LogHandler.Simple (defaultHandleAction)
 import System.Wlog.Severity (Severities, allSeverities, debugPlus, errorPlus, infoPlus, noticePlus,
                              warningPlus)
 
+import qualified Data.Aeson.Key as Key
+import qualified Data.Aeson.KeyMap as KeyMap
+import Data.Aeson.KeyMap (KeyMap)
 import qualified Data.HashMap.Strict as HM hiding (HashMap)
 import qualified Data.Set as Set
 import qualified Data.Text as Text
@@ -83,12 +86,12 @@ import qualified GHC.Show as Show
 -- Utilites & helpers
 ----------------------------------------------------------------------------
 
-filterObject :: [Text] -> HashMap Text a -> HashMap LoggerName a
-filterObject excluded = HM.fromList . map (first LoggerName) . HM.toList . HM.filterWithKey (\k _ -> k `notElem` excluded)
+filterObject :: [Text] -> KeyMap a -> HashMap LoggerName a
+filterObject excluded = HM.fromList . map (\(k, v) -> (LoggerName $ Key.toText k, v)) . KeyMap.toList . KeyMap.filterWithKey (\k _ -> (Key.toText k) `notElem` excluded)
 
 parseSeverities :: Object -> Text -> Parser (Maybe Severities)
 parseSeverities o term =
-    case HM.lookup term o of
+    case KeyMap.lookup (Key.fromText term) o of
         Just value -> case value of
             String word -> case word of
                 "All"      -> pure $ Just allSeverities
